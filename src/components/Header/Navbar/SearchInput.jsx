@@ -1,21 +1,24 @@
+import React from 'react';
+
 export default function SearchInput() {
   const handleSuhmit = () => {};
+
   return (
     <form onSubmit={handleSuhmit} className="relative">
       <input
         type="text"
         name=""
-        placeholder="buscar..."
-        className="p-1 bg-zinc-700 rounded-lg"
+        placeholder="Buscar..."
+        className="p-1 bg-black text-white text-lg rounded-md"
       />
-      <button className="absolute right-2 top-1">
+      <button className="absolute right-0 top-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-6 h-6 text-gray-500"
         >
           <path
             strokeLinecap="round"

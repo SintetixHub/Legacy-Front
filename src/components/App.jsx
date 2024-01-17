@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import HeroSection from "./components/HeroSection";
-import Blogs from "./pages/Blogs";
-import Tecnologias from "./pages/Tecnologias";
-import SobreNosotros from "./pages/SobreNosotros";
+import Home from "../pages/Home";
+import HeroSection from "./HeroSection";
+import Blogs from "../pages/Blogs";
+import Tecnologias from "../pages/Tecnologias";
+import SobreNosotros from "../pages/SobreNosotros";
 
-import Navbar from "./components/Header/Navbar/Navbar";
+import Navbar from "./Header/Navbar/Navbar";
 
 const App = () => {
   return (
