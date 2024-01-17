@@ -5,7 +5,7 @@ import SearchInput from "./SearchInput";
 
 export default function Navbar() {
   return (
-    <nav className=" max-w-5xl  m-auto border-b-2">
+    <nav className=" max-w-5xl  m-auto border-b-2 border-zinc-400">
       <section className="flex justify-between items-center py-4">
         <span className=" text-white text-4xl ml-[44%]">Sintetix</span>
         <div>
@@ -29,7 +29,7 @@ export default function Navbar() {
           </NavLink>
           {/* <NavLink to={"/"}>Más</NavLink> */}
         </div>
-        <span>|</span>
+        <span className="text-zinc-500">|</span>
         <SearchInput />
       </section>
     </nav>

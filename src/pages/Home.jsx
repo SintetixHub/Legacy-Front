@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Home</div>;
+  return <main className="max-w-5xl py-12 m-auto">Home</main>;
 }

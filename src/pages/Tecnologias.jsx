@@ -1,3 +1,3 @@
 export default function Tecnologias() {
-  return <div>Tecnologias</div>;
+  return <main className="max-w-5xl m-auto py-12">Home</main>;
 }
