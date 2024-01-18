@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import SearchInput from "./SearchInput";
 import LoginButton from "./LoginButton";
 import SignupButton from "./SignupButton";
 
@@ -10,9 +10,14 @@ export default function Navbar() {
         <span className="text-5xl ml-[44%] bg-clip-text text-transparent text-white">
           Sintetix
         </span>{" "}
+        <div className="flex gap-2">
+          <LoginButton />
+          <SignupButton />
+        </div>
       </section>
       <section className="flex justify-between items-center py-6 text-white">
         <div className="flex gap-6">
+            
           <NavLink to={"/"} className="hover:text-zinc-300">
             Home
           </NavLink>
@@ -30,9 +35,10 @@ export default function Navbar() {
           </NavLink>
         </div>
         <span className="text-zinc-500">|</span>
-        <div>
-          <LoginButton />
-          <SignupButton />
+        <div className="flex flex-col items-end">
+          
+          
+          <SearchInput />
         </div>
       </section>
     </nav>
