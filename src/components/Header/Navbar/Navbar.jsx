@@ -8,9 +8,10 @@ export default function Navbar() {
   return (
     <nav className="max-w-5xl m-auto border-b-2 border-zinc-500">
       <section className="flex justify-between items-center py-4">
-        <span className="text-4xl ml-[44%] bg-clip-text text-transparent bg-gradient-to-r from-blue-200 via-white to-blue-600">Sintetix</span>        <div>
-          <LoginButton />
-          <SignupButton />
+        <span className="text-4xl ml-[44%] bg-clip-text text-twhite">Sintetix</span>        
+        <div className="flex gap-2 m-1">
+            <LoginButton />
+            <SignupButton />
         </div>
       </section>
       <section className="flex justify-between items-center py-6 text-white">
@@ -44,3 +45,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
