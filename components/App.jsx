@@ -2,7 +2,6 @@ import { useState } from 'react'
 import reactLogo from '../src/assets/react.svg'
 import viteLogo from '/vite.svg'
 import '../styles/App.css'
-import Navbar from './components/Navbar'
 
 function App() {
   const [count, setCount] = useState(0)
