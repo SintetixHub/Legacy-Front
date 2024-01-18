@@ -1,4 +1,4 @@
-import "../styles/HeroSection.css";
+import "../../styles/HeroSection.css";
 
 const HeroSection = () => {
   const imageUrl = "/LibroHero.png";
