@@ -10,9 +10,9 @@ export default function SearchInput() {
         type="text"
         name=""
         placeholder="Buscar..."
-        className="p-1 bg-black text-white text-lg rounded-md"
+        className="p-1 bg-transparent text-white text-lg rounded-md  border border-gray-500"
       />
-      <button className="absolute right-0 top-1">
+      <button className="absolute right-2 top-1/2 transform -translate-y-1/2">
         <FontAwesomeIcon icon={faSearch} className="text-gray-500" />
       </button>
     </form>
