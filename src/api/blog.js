@@ -1,13 +1,38 @@
 const server = import.meta.env.VITE_SERVER;
 
-export const getAll = async () => {
-  try {
-    const response = await fetch(`${server}/api/blog/`);
-    return await response.json();
-  } catch (error) {
-    console.log(error);
-    return null;
+const getSuspender= (promise) => {
+  let status = "pending";
+  let response;
+
+  const suspender = promise.then(
+    (res) => {
+      status = "success";
+      response = res;
+    },
+    (err) => {
+      status = "error";
+      response = err;
+    }
+  )
+
+  const read = () => {
+    switch (status) {
+      case "pending":
+        throw suspender;
+      case "error":
+        throw response;
+      default:
+        return response;
+    }
   }
+
+  return { read }
+}
+
+export const getAll = () => {
+  const promise = fetch(`${server}/api/blog/`).then((response) => response.json()).then((data) => data)
+  return getSuspender(promise)
+
 };
 
 //get 5 tendencias y 5 ultimas agregadas

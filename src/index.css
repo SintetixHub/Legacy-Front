@@ -4,7 +4,12 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -22,3 +27,11 @@ body {
 }
 
 /* el resto de tu código */
+
+.active {
+  color: rgb(136, 166, 250)
+}
+
+.active:hover {
+  color: rgb(169, 250, 243) !important
+}

@@ -1,8 +1,13 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import SignupButton from "./SignupButton";
+import { userContext } from "../../../Context/userContext";
 
 export default function Navbar() {
+  const {user, setUser} = useContext(userContext)
+  console.log(user)
+ 
   return (
     <nav className="max-w-5xl m-auto border-b-2 border-zinc-500">
       <section className="flex justify-between items-center py-4">
@@ -24,14 +29,20 @@ export default function Navbar() {
           <NavLink to={"/sobrenosotros"} className="hover:text-zinc-300">
             Sobre Nosotros
           </NavLink>
-          <NavLink to={"/sobrenosotros"} className="hover:text-zinc-300">
+          <NavLink to={"/comunidad"} className="hover:text-zinc-300">
             Comunidad
           </NavLink>
         </div>
         <span className="text-zinc-500">|</span>
         <div className="flex gap-2">
+
+        {user === null ? <>
           <LoginButton />
           <SignupButton />
+        </> : <>
+          <NavLink to="/perfil" className={"text-sky-400 hover:text-sky-300 mr-2"}>{user.username}</NavLink>
+          <button onClick={()=>setUser(null)} className="text-zinc-400 hover:text-zinc-300">X</button>
+        </>}
         </div>
       </section>
     </nav>
