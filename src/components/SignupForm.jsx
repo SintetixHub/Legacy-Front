@@ -1,15 +1,19 @@
-import { useUserContext } from "../Context/userContext.jsx";
-import { login } from "../api/user.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import LoaderIcon from "../assets/laoader.svg";
+import { useUserContext } from "../Context/userContext.jsx";
 
-const LoginForm = () => {
-  const { user, setUser } = useUserContext();
-  const navigate = useNavigate();
+import { signup } from "../api/user";
+import SignupSuccess from "./SignupSuccess";
 
+export default function SignupForm() {
   const [alert, setAlert] = useState("");
   const [loading, setLoading] = useState(false);
+  const [signupSuccesfully, setSignupSuccessfully] = useState(false);
+
+  const { user } = useUserContext();
+  const navigate = useNavigate();
 
   const showAlert = (message) => {
     setAlert(message);
@@ -23,9 +27,17 @@ const LoginForm = () => {
 
     const username = event.target.username.value;
     const password = event.target.password.value;
+    const email = event.target.email.value;
+
+    console.log(email, " ", password, " ", username);
 
     if (username.length < 3 || username.length > 30) {
       showAlert("El nombre de usuario debe contener entre 3 y 30 caracteres");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net)$/i.test(email)) {
+      showAlert("El email no tiene un formato válido");
       return;
     }
 
@@ -37,15 +49,25 @@ const LoginForm = () => {
     }
 
     setLoading(true);
-    const response = await login(username, password);
+    const response = await signup(username, password, email);
+    console.log(response);
     setLoading(false);
     if (!response.success) {
+      if (response.message.includes("email")) {
+        showAlert("El email ya está en uso");
+        return;
+      } else if (response.message.includes("username")) {
+        showAlert("El nombre de usuario ya está en uso");
+        return;
+      }
       showAlert("Datos incorrectos");
       return;
     }
 
-    setUser(response.data);
-    navigate(-1);
+    setSignupSuccessfully(true);
+    setTimeout(() => {
+      navigate("/", { state: { confirmacion: true } });
+    }, 3000);
   };
 
   useEffect(() => {
@@ -54,16 +76,20 @@ const LoginForm = () => {
     }
   }, []);
 
+  if (signupSuccesfully) {
+    return <SignupSuccess />;
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto bg-zinc-700 gap-3 w-96 h-80 p-8 rounded-xl shadow-md flex flex-col items-center relative"
+      className="mx-auto bg-zinc-700 gap-3 w-96 h-96 p-6 rounded-xl shadow-md flex flex-col items-center relative"
     >
       {loading ? (
         <img src={LoaderIcon} alt="loader icon" />
       ) : (
         <>
-          <h2 className="text-center font-bold text-xl">Iniciar sesión</h2>
+          <h2 className="text-center font-bold text-xl">Crear cuenta</h2>
 
           <label
             className="block text-gray-300 text-sm font-bold"
@@ -77,6 +103,20 @@ const LoginForm = () => {
             name="username"
             type="text"
             placeholder="Nombre de usuario"
+          />
+
+          <label
+            className="block text-gray-300 text-sm font-bold"
+            htmlFor="email"
+          >
+            Email
+          </label>
+          <input
+            className="rounded w-full py-2 px-3 bg-gray-500 text-white placeholder-zinc-300 leading-tight focus:outline-none"
+            id="email"
+            name="email"
+            type="text"
+            placeholder="Email"
           />
 
           <label
@@ -94,7 +134,7 @@ const LoginForm = () => {
           />
 
           <button className="border-2 text-white px-4 py-1 rounded-lg mt-4 border-gray-500 hover:bg-zinc-800">
-            Iniciar sesión
+            Crear cuenta
           </button>
 
           {alert !== "" && (
@@ -106,6 +146,4 @@ const LoginForm = () => {
       )}
     </form>
   );
-};
-
-export default LoginForm;
+}

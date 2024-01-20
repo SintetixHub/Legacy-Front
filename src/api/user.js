@@ -14,12 +14,12 @@ export const login = async (username, password) => {
   }
 };
 
-export const signup = async (username, password) => {
+export const signup = async (username, password, email) => {
   try {
     const response = await fetch(`${server}/api/auth/signup`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password, email }),
     });
     return await response.json();
   } catch (error) {
